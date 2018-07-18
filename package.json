@@ -1,0 +1,36 @@
+{
+  "name": "overload-bracket",
+  "version": "0.0.1",
+  "description": "Overload square bracket operator [] to any object in javascript using es6 proxy.",
+  "main": "index.js",
+  "scripts": {
+    "build": "npm run build:node",
+    "build:node": "rollup src/index.mjs -f cjs > index.js && rollup src/test.mjs -f cjs > test.js",
+    "build:brow": "rollup src/index.mjs -f iife --name=PseudoArray > dist/index.browser.js",
+    "test": "npm run build && node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/munrocket/overload-bracket.git"
+  },
+  "keywords": [
+    "pseudoarray",
+    "proxy",
+    "overload",
+    "brackets",
+    "brace",
+    "meta",
+    "meta-programming",
+    "es6"
+  ],
+  "author": "munrocket",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/munrocket/overload-bracket/issues"
+  },
+  "homepage": "https://github.com/munrocket/overload-bracket#readme",
+  "devDependencies": {
+    "rollup": "^0.63.2",
+    "tape": "^4.9.1"
+  }
+}
