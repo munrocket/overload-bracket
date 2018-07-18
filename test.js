@@ -7,13 +7,13 @@ var tape = _interopDefault(require('tape'));
 /**
  * This class overloads operator[] and array methods to given object.
  * For example you have object with vector of points `let V = {points: [{x: 1, y: 2}, {x: 10, y: 20}, {x: -1, y: -2}]}`.
- * You can create pseudo-array of x points by `let X = new PseudoArray(V, x => x.points, x => x.x, (x, v) => x.x = v`.
+ * You can create pseudo-array of x points by `let X = new ObjectHandler(V, x => x.points, x => x.x, (x, v) => x.x = v`.
  * And access the elements of an pseudo-array like it ordinary array `(X[0] + X[1]) / X.length` and `X.filter(func)`
  */
-class PseudoArray {
+class ObjectHandler {
 
   /**
-   * @constructor PseudoArray constructor
+   * @constructor ObjectHandler constructor
    * @param object Target object with data
    * @param container Function that return iterable container
    * @param getter Getter inside container
@@ -174,16 +174,16 @@ class PseudoArray {
   }
 
   get [Symbol.toStringTag]() {
-    return "PseudoArray";
+    return "ObjectHandler";
   }
 }
 
-let obj = { "arr": [{ a: 1, b: {c: '100'}},
-                    { a: 2, b: {c: '200'}},
-                    { a: 3, b: {c: '300'}}],
-            "ord": 123 };
-let test = new PseudoArray(obj, x => x.arr, x => x.b.c, (x, val) => { x.b.c = val; });
-let test2 = new PseudoArray(obj, x => x.arr, x => x.a, (x, val) => { x.a = val; });
+let obj = { "arr": [{ x: 1, d: {y: '100'}},
+                    { x: 2, d: {y: '200'}},
+                    { x: 3, d: {y: '300'}}],
+            "literal": 123 };
+let test = new ObjectHandler(obj, p => p.arr, p => p.d.y, (p, val) => { p.d.y = val; });
+let test2 = new ObjectHandler(obj, p => p.arr, p => p.x, (p, val) => { p.x = val; });
 
 tape('Square bracket getter', function(t) {
   t.equal(test[0] == 100, true, 'Accessing by square bracket fail');
@@ -204,7 +204,7 @@ tape('Setter accessor', function(t) {
 });
 
 tape('Ordinary property of object', function(t) {
-  t.equal(test['ord'] == 123, true, 'Ordinary property of object unavailable');
+  t.equal(test['literal'] == 123, true, 'Ordinary property of object unavailable');
   t.end();
 });
 

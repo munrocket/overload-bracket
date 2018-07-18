@@ -1,24 +1,24 @@
 {
-  "name": "overload-bracket",
-  "version": "0.0.1",
-  "description": "Overload square bracket operator [] to any object in javascript using es6 proxy.",
+  "name": "object-handler",
+  "version": "0.1.0",
+  "description": "Overloading square bracket operator [] and other array methods to any object with container using es6 proxy.",
   "main": "index.js",
   "scripts": {
     "build": "npm run build:node",
     "build:node": "rollup src/index.mjs -f cjs > index.js && rollup src/test.mjs -f cjs > test.js",
-    "build:brow": "rollup src/index.mjs -f iife --name=PseudoArray > dist/index.browser.js",
+    "build:browser": "rollup src/index.mjs -f iife --name=ObjectHandler > dist/index.browser.js",
     "test": "npm run build && node test.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/munrocket/overload-bracket.git"
+    "url": "git+https://github.com/munrocket/object-handler.git"
   },
   "keywords": [
-    "pseudoarray",
-    "proxy",
     "overload",
     "brackets",
-    "brace",
+    "pseudo-array",
+    "array-like",
+    "proxy",
     "meta",
     "meta-programming",
     "es6"
@@ -26,9 +26,9 @@
   "author": "munrocket",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/munrocket/overload-bracket/issues"
+    "url": "https://github.com/munrocket/object-handler/issues"
   },
-  "homepage": "https://github.com/munrocket/overload-bracket#readme",
+  "homepage": "https://github.com/munrocket/object-handler#readme",
   "devDependencies": {
     "rollup": "^0.63.2",
     "tape": "^4.9.1"

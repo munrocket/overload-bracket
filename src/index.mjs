@@ -1,13 +1,13 @@
 /**
  * This class overloads operator[] and array methods to given object.
  * For example you have object with vector of points `let V = {points: [{x: 1, y: 2}, {x: 10, y: 20}, {x: -1, y: -2}]}`.
- * You can create pseudo-array of x points by `let X = new PseudoArray(V, x => x.points, x => x.x, (x, v) => x.x = v`.
+ * You can create pseudo-array of x points by `let X = new ObjectHandler(V, x => x.points, x => x.x, (x, v) => x.x = v`.
  * And access the elements of an pseudo-array like it ordinary array `(X[0] + X[1]) / X.length` and `X.filter(func)`
  */
-export default class PseudoArray {
+export default class ObjectHandler {
 
   /**
-   * @constructor PseudoArray constructor
+   * @constructor ObjectHandler constructor
    * @param object Target object with data
    * @param container Function that return iterable container
    * @param getter Getter inside container
@@ -168,6 +168,6 @@ export default class PseudoArray {
   }
 
   get [Symbol.toStringTag]() {
-    return "PseudoArray";
+    return "ObjectHandler";
   }
 }

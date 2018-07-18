@@ -1,12 +1,12 @@
 import tape from 'tape';
-import PseudoArray from './index';
+import ObjectHandler from './index';
 
-let obj = { "arr": [{ a: 1, b: {c: '100'}},
-                    { a: 2, b: {c: '200'}},
-                    { a: 3, b: {c: '300'}}],
-            "ord": 123 };
-let test = new PseudoArray(obj, x => x.arr, x => x.b.c, (x, val) => { x.b.c = val });
-let test2 = new PseudoArray(obj, x => x.arr, x => x.a, (x, val) => { x.a = val });
+let obj = { "arr": [{ x: 1, d: {y: '100'}},
+                    { x: 2, d: {y: '200'}},
+                    { x: 3, d: {y: '300'}}],
+            "literal": 123 };
+let test = new ObjectHandler(obj, p => p.arr, p => p.d.y, (p, val) => { p.d.y = val });
+let test2 = new ObjectHandler(obj, p => p.arr, p => p.x, (p, val) => { p.x = val });
 
 tape('Square bracket getter', function(t) {
   t.equal(test[0] == 100, true, 'Accessing by square bracket fail');
@@ -27,7 +27,7 @@ tape('Setter accessor', function(t) {
 });
 
 tape('Ordinary property of object', function(t) {
-  t.equal(test['ord'] == 123, true, 'Ordinary property of object unavailable')
+  t.equal(test['literal'] == 123, true, 'Ordinary property of object unavailable')
   t.end();
 });
 
