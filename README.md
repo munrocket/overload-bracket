@@ -1,4 +1,4 @@
-ObjectHandler
+Overload bracket
 =========
 
 Overloading square bracket operator [] and other array methods to any object with container using es6 proxy.
@@ -18,9 +18,6 @@ console.log(x.join(", "));
 ### Installation
 
 If you use new node.js or modern browsers just install npm package `npm i object-handler` or run command `npm run build:browser` to build web page script. With es5 environment you need to think about babel, babel-proxy-plugin or [harmony-reflect](https://github.com/tvcutsem/harmony-reflect).
-
-### 2do
-* We don't need setters here. Make smaller library.
 
 ### Contributing
 

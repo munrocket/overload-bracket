@@ -1,5 +1,5 @@
 {
-  "name": "object-handler",
+  "name": "overload-bracket",
   "version": "0.1.0",
   "description": "Overloading square bracket operator [] and other array methods to any object with container using es6 proxy.",
   "main": "index.js",
