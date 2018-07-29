@@ -98,10 +98,11 @@ class ObjectHandler {
 
   map() {
     return (op) => {
+      let result = [];
       for (let i = 0; i < this.length; i++) {
-        this.proxy[i] = op(this.proxy[i], i, this.proxy);
+        result.push(op(this.proxy[i], i, this.proxy));
       }
-      return this.proxy;
+      return result;
     }
   }
 
@@ -221,9 +222,10 @@ tape('Method forEach()', function(t) {
 });
 
 tape('Method map()', function(t) {
-  test2.map((item, i) => item * 100 / (i + 1));
-  t.deepEqual(test2.slice(0), [100,100,100]);
-  test2.map((item, i) => i + 1);
+  let a = test2.map((item, i) => item * 100 / (i + 1));
+  console.log(a, test2);
+  t.deepEqual(a.slice(0), [100,100,100]);
+  test2.map((a, i) => i + 1);
   t.end();
 });
 

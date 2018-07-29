@@ -92,10 +92,11 @@ export default class ObjectHandler {
 
   map() {
     return (op) => {
+      let result = [];
       for (let i = 0; i < this.length; i++) {
-        this.proxy[i] = op(this.proxy[i], i, this.proxy);
+        result.push(op(this.proxy[i], i, this.proxy));
       }
-      return this.proxy;
+      return result;
     }
   }
 
@@ -148,7 +149,7 @@ export default class ObjectHandler {
   }
 
   join() {
-    return (separator) => {
+    return (separator = ",") => {
       let result = "";
       for (let i = 0; i < this.length - 1; i++) {
         result += this.proxy[i] + separator;
