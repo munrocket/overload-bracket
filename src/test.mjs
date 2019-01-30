@@ -71,6 +71,19 @@ tape('Method every()', function(t) {
   t.end();
 });
 
+tape('Method every() thisarg', function(t) {
+  let that = {'foo':42};
+  let fn = function(item, i) { return this && this.foo === 42 && 1 <= item && item <= 3 && 0 <= i && i < 3 };
+  let p = test2.every( fn, that );
+  let p2 = test2.every( fn );
+  let p3 = test2.every((item, i) => 1 <= item && item <= 3 && 0 <= i && i < 3);
+  t.ok(p);
+  t.notOk(p2);
+  t.ok(p3);
+  t.end();
+});
+
+
 tape('Method reverse()', function(t) {
   t.deepEqual(test2.reverse().slice(0), [3, 2, 1]);
   test2.reverse();

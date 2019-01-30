@@ -123,10 +123,10 @@ export default class ObjectHandler {
   }
   
   every() {
-    return (op) => {
+    return (op,thisArg=undefined) => {
       let isEvery = true;
       for(let i = 0; i < this.length; i++) {
-        if (op(this.proxy[i], i, this.proxy)) {
+        if (op.call(thisArg, this.proxy[i], i, this.proxy)) {
           continue;
         } else {
           isEvery = false;

@@ -125,10 +125,10 @@ class ObjectHandler {
   }
   
   every() {
-    return (op) => {
+    return (op,thisArg=undefined) => {
       let isEvery = true;
       for(let i = 0; i < this.length; i++) {
-        if (op(this.proxy[i], i, this.proxy)) {
+        if (op.call(thisArg, this.proxy[i], i, this.proxy)) {
           continue;
         } else {
           isEvery = false;
@@ -151,7 +151,7 @@ class ObjectHandler {
   }
 
   join() {
-    return (separator) => {
+    return (separator = ",") => {
       let result = "";
       for (let i = 0; i < this.length - 1; i++) {
         result += this.proxy[i] + separator;
