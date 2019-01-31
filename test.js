@@ -129,10 +129,10 @@ class ObjectHandler {
   }
   
   every() {
-    return (op) => {
+    return (op,thisArg=undefined) => {
       let isEvery = true;
       for(let i = 0; i < this.length; i++) {
-        if (op(this.proxy[i], i, this.proxy)) {
+        if (op.call(thisArg, this.proxy[i], i, this.proxy)) {
           continue;
         } else {
           isEvery = false;
@@ -155,7 +155,7 @@ class ObjectHandler {
   }
 
   join() {
-    return (separator) => {
+    return (separator = ",") => {
       let result = "";
       for (let i = 0; i < this.length - 1; i++) {
         result += this.proxy[i] + separator;
@@ -248,6 +248,19 @@ tape('Method every()', function(t) {
   t.deepEqual([p, q], [true, false]);
   t.end();
 });
+
+tape('Method every() thisarg', function(t) {
+  let that = {'foo':42};
+  let fn = function(item, i) { return this && this.foo === 42 && 1 <= item && item <= 3 && 0 <= i && i < 3 };
+  let p = test2.every( fn, that );
+  let p2 = test2.every( fn );
+  let p3 = test2.every((item, i) => 1 <= item && item <= 3 && 0 <= i && i < 3);
+  t.ok(p);
+  t.notOk(p2);
+  t.ok(p3);
+  t.end();
+});
+
 
 tape('Method reverse()', function(t) {
   t.deepEqual(test2.reverse().slice(0), [3, 2, 1]);
